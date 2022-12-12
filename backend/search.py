@@ -1,4 +1,4 @@
-from backend.settings import *
+from settings import *
 import requests
 from requests.exceptions import RequestException
 import pandas as pd

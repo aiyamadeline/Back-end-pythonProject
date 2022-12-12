@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
-from backend.search import search
-from backend.filter import Filter
+from search import search
+from filter import Filter
 from storage import DBstorage
 import html
 
