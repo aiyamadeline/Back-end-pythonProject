@@ -1,12 +1,15 @@
 import sqlite3
 import pandas as pd
+from sqlite_utils import Database
+
 
 class DBstorage():
     def __init__(self):
         self.con = sqlite3.connect("links.db")
         self.setup_tables()
+        
 
-    #creating table
+    #creating tables
     def setup_tables(self):
         cur = self.con.cursor()
         results_table = r"""
@@ -23,14 +26,34 @@ class DBstorage():
                 UNIQUE(query, link)
             );
         """
-
+        users_table = r"""
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY,
+                username TEXT,
+                password TEXT,
+                UNIQUE(username)
+            );
+        """
         cur.execute(results_table)
+        cur.execute(users_table)
         self.con.commit()
-        cur.close()
+        #self.con.close()
 
+    
     def query_results(self, query):
         df = pd.read_sql(f"select * from results where query='{query}'order by rank asc;", self.con)
         return df
+
+    def find_user(self, username):
+        cur = self.con.cursor()
+        try:
+            res = cur.execute("select * from users where username = :username limit 1;", {'username': username})
+            return res.fetchone()
+        except sqlite3.IntegrityError:
+            pass
+        user = cur.fetchone()
+        cur.close()
+        return user
 
     def insert_row(self, values):
         cur = self.con.cursor()
@@ -49,6 +72,18 @@ class DBstorage():
         self.con.commit()
         cur.close()
 
+    
+    def register_user(self, username, password):
+        try:
+            cur = self.con.cursor()
+            cur.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, password))
+            self.con.commit()
+        except sqlite3.IntegrityError:
+            pass
+        cur.close()
+        
+                        
+    
         
 
     

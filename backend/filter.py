@@ -4,13 +4,10 @@ from settings import *
 from html.parser import HTMLParser
 
 
+
 with open("blacklist.txt") as f:
     domains = set(f.read().split("\n"))
 
-# def get_page_content(row):
-#     soup = BeautifulSoup(row["html"])
-#     text = soup.get_text()
-#     return text
 
 #loop through list of url's and 
 def tracker_urls(row):
