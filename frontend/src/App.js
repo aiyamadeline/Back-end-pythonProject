@@ -1,47 +1,17 @@
 import React, { useState } from 'react';
+import SearchForm from '../SearchForm';
+import SearchResults from '../SearchResults';
 
-function SearchForm() {
-  const [query, setQuery] = useState('');
+function App() {
+  // State for the search results
   const [results, setResults] = useState([]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    fetch(`http://localhost:5000/search?query=${query}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setResults(data.results);
-      });
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-      />
-      <button type="submit">Search</button>
+    <div>
+      <SearchForm onSearch={setResults} />
       <SearchResults results={results} />
-    </form>
+    </div>
   );
 }
 
-function SearchResults({ results }) {
-  return (
-    <ul>
-      {results.map((result) => (
-        <li key={result.id}>{result.title}</li>
-      ))}
-    </ul>
-  );
-}
-
-export default SearchForm;
-
-
-
-
-
-
-
+export default App;
