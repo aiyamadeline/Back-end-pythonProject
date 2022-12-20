@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
+function SearchForm() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    fetch(`http://localhost:5000/search?query=${query}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setResults(data.results);
+      });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+      />
+      <button type="submit">Search</button>
+      <SearchResults results={results} />
+    </form>
   );
 }
 
-export default App;
+function SearchResults({ results }) {
+  return (
+    <ul>
+      {results.map((result) => (
+        <li key={result.id}>{result.title}</li>
+      ))}
+    </ul>
+  );
+}
+
+export default SearchForm;
+
+
+
+
+
+
+
