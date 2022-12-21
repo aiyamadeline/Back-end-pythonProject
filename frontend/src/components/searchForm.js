@@ -8,7 +8,8 @@ const SearchForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Send a GET request to the API endpoint from the Python backend, passing the search query as a query parameter `/api/search?q=
+    // Send a GET request to the API endpoint from the Python backend, passing the search query as a query parameter (`/api/search?q=)
+    
     fetch(`http://localhost:5000/${query}`)
       .then((response) => response.json())
       .then((data) => {
@@ -18,8 +19,10 @@ const SearchForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+   // <form onSubmit={handleSubmit}>
+   <form action='http://localhost:5000/' method='POST'>
       <input
+        name='query'
         type="text"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
