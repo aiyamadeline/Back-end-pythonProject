@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SearchForm from '../SearchForm';
-import SearchResults from '../SearchResults';
+import SearchForm from './components/searchForm';
+import SearchResults from './components/searchResults';
 
 function App() {
   // State for the search results

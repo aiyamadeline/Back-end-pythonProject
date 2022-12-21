@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SearchForm() {
+const SearchForm = () => {
   // State for the search query
   const [query, setQuery] = useState('');
 
@@ -8,8 +8,8 @@ function SearchForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Send a GET request to the API endpoint from the Python backend, passing the search query as a query parameter
-    fetch(`/api/search?q=${query}`)
+    // Send a GET request to the API endpoint from the Python backend, passing the search query as a query parameter `/api/search?q=
+    fetch(`http://localhost:5000/${query}`)
       .then((response) => response.json())
       .then((data) => {
         // Handle the response from the API and display the search results to the user
