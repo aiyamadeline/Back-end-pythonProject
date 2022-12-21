@@ -6,6 +6,8 @@ import html
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 import pandas as pd
+from flask_cors import CORS, cross_origin
+import numpy as np
 
 #from flask.ext.reqarg import request_args
 #from flask_navigation import Navigation
@@ -16,6 +18,7 @@ app = Flask(__name__)
 app.secret_key = "hello"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.sqlite3"
 db.__init__(app)
+CORS(app)
 #app.add_url_rule("/", endpoint="index")
 #nav = Navigation(app)
 
@@ -106,9 +109,8 @@ def search_form():
     if request.method == "POST":
         query = request.form["query"]
         return run_search(query)
-    else: 
-        #return render_template('index.html')
-        
+    else:
+
         return show_search_form()
 
 
@@ -143,9 +145,10 @@ def login():
 
 
         session["userId"] = found_user[0]
+        user_arr = np.array(found_user)
+        page = request.args.get('username')
         
-        flash("Login succesful!")
-        return show_search_form()
+        return redirect(url_for('success', name = page ))
         
     elif  "userId" in session:
             flash("Already Logged In!")
@@ -154,6 +157,9 @@ def login():
     else:
         return show_login_form()
 
+@app.route('/success/<name>')
+def success(name):
+    return 'welcome %s' % name
 
 
 @app.route("/register", methods = ["POST", "GET"])
@@ -169,10 +175,10 @@ def register():
             flash("Password is required!")
 
         else:
-            
+            page = request.args.get('username')
             cur = DBstorage()
             cur.register_user(username, password)
-            return 'registration successful'
+            return redirect(url_for('success', name = page ))
     
     return show_registration_form()
        
