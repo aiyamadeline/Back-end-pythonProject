@@ -31,6 +31,7 @@ class DBstorage():
                 id INTEGER PRIMARY KEY,
                 username TEXT,
                 password TEXT,
+                email TEXT,
                 UNIQUE(username)
             );
         """
@@ -82,6 +83,7 @@ class DBstorage():
             pass
         cur.close()
         
+    
                         
     
         

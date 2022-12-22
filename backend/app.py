@@ -11,14 +11,14 @@ import numpy as np
 
 #from flask.ext.reqarg import request_args
 #from flask_navigation import Navigation
-
 db = SQLAlchemy()
-
 app = Flask(__name__)
 app.secret_key = "hello"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.sqlite3"
-db.__init__(app)
+db.__init__(app)    
 CORS(app)
+
+    
 #app.add_url_rule("/", endpoint="index")
 #nav = Navigation(app)
 
@@ -79,13 +79,6 @@ login_tempate = """
 
 """
 
-# nav.Bar('top', [
-#     nav.Item('Login', 'login'),
-#     nav.Item('Register', 'register')
-# ])
-
-def convert_data():
-    return 
 def show_registration_form():
     return register_template
 
@@ -110,7 +103,6 @@ def search_form():
         query = request.form["query"]
         return run_search(query)
     else:
-
         return show_search_form()
 
 
@@ -127,6 +119,11 @@ def mark_relevant():
 def show_login_form():
     return login_tempate
 
+@app.route('/success/<name>')
+def success(name):
+    user_page = 'welcome %s' % name
+    
+    return user_page
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -144,11 +141,11 @@ def login():
             return show_search_form()
 
 
-        session["userId"] = found_user[0]
+        session["username"] = found_user[0]
         user_arr = np.array(found_user)
         page = request.args.get('username')
         
-        return redirect(url_for('success', name = page ))
+        return 'logged in'
         
     elif  "userId" in session:
             flash("Already Logged In!")
@@ -157,9 +154,6 @@ def login():
     else:
         return show_login_form()
 
-@app.route('/success/<name>')
-def success(name):
-    return 'welcome %s' % name
 
 
 @app.route("/register", methods = ["POST", "GET"])
@@ -182,6 +176,7 @@ def register():
     
     return show_registration_form()
        
+
 
 # @app.route("/member", methods=["POST", "GET"])
 # def user():
