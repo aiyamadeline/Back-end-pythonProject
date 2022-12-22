@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SearchForm from './components/searchForm';
 import SearchResults from './components/searchResults';
+import LoginForm from './components/login';
 
 function App() {
   // State for the search results
@@ -10,6 +11,7 @@ function App() {
     <div>
       <SearchForm onSearch={setResults} />
       <SearchResults results={results} />
+      <LoginForm/>
     </div>
   );
 }

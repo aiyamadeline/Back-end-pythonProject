@@ -7,6 +7,13 @@ const SearchForm = () => {
   // Function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
+    const data = new FormData();
+    data.append("query", query);
+    fetch("http://localhost:5000", {
+    method: "POST",
+    body: data
+    });
+
 
     // Send a GET request to the API endpoint from the Python backend, passing the search query as a query parameter (`/api/search?q=)
     
@@ -28,8 +35,15 @@ const SearchForm = () => {
         onChange={(event) => setQuery(event.target.value)}
       />
       <button type="submit">Search</button>
+      
     </form>
   );
 }
+/* const data = new FormData();
+data.append("query", query);
+fetch("http://localhost:5000", {
+method: "POST",
+body: data
+}); */
 
 export default SearchForm;
