@@ -3,18 +3,26 @@ import SearchForm from './components/searchForm';
 import SearchResults from './components/searchResults';
 import LoginForm from './components/login';
 import RegisterForm from './components/register';
+import Navbar from './components/navbar';
+import './App.css';
 
 function App() {
   // State for the search results
   const [results, setResults] = useState([]);
 
   return (
-    <div>
+  <div>
+    <header>
+    </header>
+    <main>
       <SearchForm onSearch={setResults} />
       <SearchResults results={results} />
       <LoginForm/>
       <RegisterForm/>
-    </div>
+      </main>
+    <footer>
+    </footer>
+  </div>
   );
 }
 

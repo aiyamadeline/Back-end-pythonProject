@@ -27,7 +27,7 @@ const SearchForm = () => {
 
   return (
    // <form onSubmit={handleSubmit}>
-   <form action='http://localhost:5000/' method='POST'>
+   <form action='http://localhost:5000/' method='POST' className='search-bar'>
       <input
         name='query'
         type="text"

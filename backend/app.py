@@ -29,14 +29,6 @@ search_template = """
     <input type="text" name="query">
     <input type="submit" value="search">
 </form>
-
-<div>
-    <a href="/login">Login</a>
-
-    <a href="/register">Register</a>
-</div>
-
-
 """
 
 result_template = """
@@ -102,6 +94,7 @@ def search_form():
     if request.method == "POST":
         query = request.form["query"]
         return run_search(query)
+
     else:
         return show_search_form()
 
