@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SearchForm from './components/searchForm';
 import SearchResults from './components/searchResults';
 import LoginForm from './components/login';
+import RegisterForm from './components/register';
 
 function App() {
   // State for the search results
@@ -12,6 +13,7 @@ function App() {
       <SearchForm onSearch={setResults} />
       <SearchResults results={results} />
       <LoginForm/>
+      <RegisterForm/>
     </div>
   );
 }
