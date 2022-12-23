@@ -17,8 +17,8 @@ function RegisterForm() {
   };
   return (
     <div>
-      <button onClick={() => setShowForm(true)}>Register</button>
-      <form style={{ display: showForm ? 'block' : 'none' }} onSubmit={handleSubmit}>
+      <button id = "registerButton" onClick={() => setShowForm(true)}>Register</button>
+      <form className = "Register" style={{ display: showForm ? 'block' : 'none' }} onSubmit={handleSubmit}>
         <label>
           Email:
           <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} />

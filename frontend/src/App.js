@@ -3,7 +3,6 @@ import SearchForm from './components/searchForm';
 import SearchResults from './components/searchResults';
 import LoginForm from './components/login';
 import RegisterForm from './components/register';
-import Navbar from './components/navbar';
 import './App.css';
 
 function App() {
@@ -11,7 +10,7 @@ function App() {
   const [results, setResults] = useState([]);
 
   return (
-  <div>
+  <div class = "container">
     <header>
     </header>
     <main>
