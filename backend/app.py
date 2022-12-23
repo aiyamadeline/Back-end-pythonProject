@@ -138,7 +138,7 @@ def login():
         user_arr = np.array(found_user)
         page = request.args.get('username')
         
-        return redirect(url_for('search_form', page))
+        return redirect(url_for('search_form'))
         
     elif  "userId" in session:
             flash("Already Logged In!")
@@ -168,7 +168,7 @@ def register():
             page = request.args.get('username')
             cur = DBstorage()
             cur.register_user(username, password, email)
-            return redirect(url_for('search_form', page ))
+            return redirect(url_for('search_form'))
     
     return show_registration_form()
        

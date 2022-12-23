@@ -77,7 +77,7 @@ class DBstorage():
     def register_user(self, username, password, email):
         try:
             cur = self.con.cursor()
-            cur.execute('INSERT INTO users (username, password, email) VALUES (?, ?)', (username, password, email))
+            cur.execute('INSERT INTO users (username, password, email) VALUES (?, ?, ?)', (username, password, email))
             self.con.commit()
         except sqlite3.IntegrityError:
             pass
