@@ -4,6 +4,9 @@ import SearchResults from './components/searchResults';
 import LoginForm from './components/login';
 import RegisterForm from './components/register';
 
+import './App.css';
+
+
 function App() {
   // State for the search results
   const [results, setResults] = useState([]);
@@ -21,7 +24,12 @@ function App() {
   };
 
   return (
-    <div>
+
+  <div class = "container">
+    <header>
+    </header>
+    
+
       <SearchForm onSearch={setResults} />
       <SearchResults results={results} />
       <LoginForm/>
