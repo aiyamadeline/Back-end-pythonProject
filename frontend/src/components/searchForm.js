@@ -31,10 +31,11 @@ const SearchForm = () => {
       <input
         name='query'
         type="text"
+        placeholder="Search anything..."
         value={query}
         onChange={(event) => setQuery(event.target.value)}
       />
-      <button type="submit">Search</button>
+      <button type="submit"></button>
       
     </form>
   );
